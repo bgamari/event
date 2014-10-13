@@ -5,14 +5,15 @@ import Foreign.C.Error (throwErrnoIfMinus1Retry_)
 import Foreign.Marshal.Alloc (alloca)
 import Foreign.Storable
 import System.Directory
-import System.Event
+import GHC.Event
 import System.IO
 import System.Posix.IO
 import System.Posix.Internals (c_close, c_read, c_write)
 import System.Posix.Types (Fd(..))
 
-readCallback :: MVar () -> IORef Int -> Int -> Fd -> Event -> IO ()
-readCallback done counter count (Fd fd) evt = do
+readCallback :: MVar () -> IORef Int -> Int -> FdKey -> Event -> IO ()
+readCallback done counter count fdKey evt = do
+  let Fd fd = keyFd fdKey
   c <- atomicModifyIORef counter $ \x -> (x+1,x)
   if c == count
     then c_close fd >> putMVar done ()
@@ -26,7 +27,7 @@ main = do
           (\(path, h) -> hClose h >> removeFile path) $ \(path,h) -> do
     hPutStr h (take numBytes ['a'..])
     hSeek h AbsoluteSeek 0
-    mgr <- new
+    mgr <- new False
     done <- newEmptyMVar
     count <- newIORef 0
     fd <- handleToFd h
