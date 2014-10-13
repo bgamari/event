@@ -1,5 +1,6 @@
 {-# LANGUAGE ForeignFunctionInterface, GeneralizedNewtypeDeriving,
     NoImplicitPrelude #-}
+{-# LANGUAGE BangPatterns #-}
 
 --
 -- | A binding to the epoll I/O event notification facility
@@ -37,7 +38,7 @@ import Data.Bits (Bits, (.|.), (.&.))
 import Data.Monoid (Monoid(..))
 import Data.Word (Word32)
 import Foreign.C.Error (throwErrnoIfMinus1, throwErrnoIfMinus1_)
-import Foreign.C.Types (CInt)
+import Foreign.C.Types (CInt(..))
 import Foreign.Marshal.Utils (with)
 import Foreign.Ptr (Ptr)
 import Foreign.Storable (Storable(..))

@@ -1,6 +1,6 @@
 include common.mk
 
-ghc-test-flags := -package QuickCheck-1.2.0.0 -package test-framework \
+ghc-test-flags := -package QuickCheck-1.2.0.1 -package test-framework \
 	-package test-framework-quickcheck -package HUnit \
 	-package test-framework-hunit -package network
 

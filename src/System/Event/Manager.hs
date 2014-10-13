@@ -1,5 +1,6 @@
 {-# LANGUAGE BangPatterns, CPP, ExistentialQuantification, NoImplicitPrelude,
     RecordWildCards, TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 module System.Event.Manager
     ( -- * Types
       EventManager

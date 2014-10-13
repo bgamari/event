@@ -1,4 +1,5 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE BangPatterns #-}
 
 module System.Event.Clock (getCurrentTime) where
 
@@ -6,7 +7,7 @@ module System.Event.Clock (getCurrentTime) where
 
 import Foreign (Ptr, Storable(..), nullPtr, with)
 import Foreign.C.Error (throwErrnoIfMinus1_)
-import Foreign.C.Types (CInt, CLong)
+import Foreign.C.Types (CInt(..), CLong(..))
 import GHC.Base
 import GHC.Err
 import GHC.Num

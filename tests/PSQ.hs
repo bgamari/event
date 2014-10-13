@@ -16,19 +16,15 @@ import Test.QuickCheck
 
 instance Arbitrary Int64 where
     arbitrary = fromInteger `fmap` arbitrary
-    coarbitrary = undefined
 
 instance Arbitrary Unique where
     arbitrary = Unique `fmap` arbitrary
-    coarbitrary = undefined
 
 instance Arbitrary a => Arbitrary (Elem a) where
     arbitrary = liftM3 E arbitrary arbitrary arbitrary
-    coarbitrary = undefined
 
 instance Arbitrary a => Arbitrary (PSQ a) where
     arbitrary = Q.fromList `fmap` arbitrary
-    coarbitrary = undefined
 
 tests :: Test
 tests = testGroup "System.Event.PSQ" testlist
